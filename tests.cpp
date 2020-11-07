@@ -116,8 +116,8 @@ void testEquality(const Collection& collection_1_, const Collection& collection_
 }
 
 void testFile(const Collection& collection_/*, const Note &note, size_t n*/) {
-    string i_file = "C:\\Users\\liza\\Desktop\\input.txt";
-    string o_file = "C:\\Users\\liza\\Desktop\\output.txt";
+    string i_file = "input.txt";
+    string o_file = "output.txt";
     Collection collection_1 = collection_, collection_2;
     collection_1.readFromFile(i_file);
     collection_1.writeToFile(o_file);
