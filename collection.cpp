@@ -19,15 +19,15 @@ Collection::Collection(size_t n) {
 }
 
 Collection::Collection(const Collection &copy) {
-   copyFromCopy(copy);
+    this->m_size = copy.m_size;
+    this->m_data.reset(new Note[this->m_size]);
+    this->m_allocated = this->m_size;
+    for (size_t i = 0; i < this->m_size; i++) {
+        this->m_data[i] = copy.m_data[i];
+    }
 }
 
-Collection& Collection::copyOperator(const Collection &copy) {
-    copyFromCopy(copy);
-    return *this;
-}
-
-void Collection::checkData() {
+void Collection::checkData() const {
     Note tmp_data;
     for (size_t i = 0; i < this->m_size; ++i) {
         tmp_data = searchIndex(i);
@@ -39,7 +39,7 @@ void Collection::checkData() {
     }
 }
 
-void Collection::checkLogic() {
+void Collection::checkLogic() const {
     vector<vector<unsigned int>> sort_date, unsort_date;
     Note tmp_data;
     for (size_t i = 0; i <this-> m_size; ++i) {
@@ -54,7 +54,7 @@ void Collection::checkLogic() {
         cout << "Logic mistakes found." << endl;
 }
 
-void Collection::writeToFile(string filename) {
+void Collection::writeToFile(string filename) const {
     ofstream file (filename);
     Note tmp_data;
     if (file.is_open()) {
@@ -106,7 +106,7 @@ size_t Collection::size() const {
     return this->m_size;
 }
 
-Note &Collection::searchIndex(size_t n) {
+Note &Collection::searchIndex(size_t n) const {
     if (n >= this->m_size) {
         throw out_of_range("");
     }
@@ -140,39 +140,3 @@ void Collection::clear() {
     this->m_data = nullptr;
     this->m_size = 0;
 }
-
-
-/*ostream& operator<<(ostream& stream_, const Collection& collection_) {
-    if (collection_.m_data == nullptr) {
-        return stream_;
-    }
-    auto p = collection_.m_data.get();
-    auto s = collection_.size();
-    stream_.write(reinterpret_cast<char*>(&s), sizeof(s));
-    while (p) {
-        stream_ << p;
-        p++;
-    }
-    return stream_;
-}
-
-istream& operator>>(istream& stream_, Collection& collection_) {
-    collection_.clear();
-    uint64_t s{0};
-    for (uint64_t i = 0; i < s; ++i) {
-            stream_.read(reinterpret_cast<char*>(&s), sizeof(s));
-            collection_.pushBack(s);
-        }
-    return stream_;
-}*/
-
-void Collection::copyFromCopy(const Collection &copy) {
-    m_size = copy.m_size;
-    m_data.reset(new Note[m_size]);
-    m_allocated = m_size;
-    for (size_t i = 0; i < m_size; i++) {
-        m_data[i] = copy.m_data[i];
-    }
-}
-
-

@@ -116,14 +116,15 @@ void testEquality(const Collection& collection_1_, const Collection& collection_
 }
 
 void testFile(const Collection& collection_/*, const Note &note, size_t n*/) {
-    string i_file = "input.txt";
-    string o_file = "output.txt";
+    string i_file = "C:\\Users\\liza\\Documents\\part2\\input.txt";
+    string o_file = "C:\\Users\\liza\\Documents\\part2\\output.txt";
     Collection collection_1 = collection_, collection_2;
     collection_1.readFromFile(i_file);
     collection_1.writeToFile(o_file);
     cout << "Input and output is over." << endl;
     collection_2.readFromFile(o_file);
     showData(collection_1);
+    showData(collection_2);
     assert(Equality(collection_1, collection_2) == 0);
     /*
     testCopyConstructor(collection_);

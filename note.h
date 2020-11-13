@@ -9,10 +9,6 @@ class Note {
 public:
     static constexpr double WATER_MIN = 1;
     static constexpr double WATER_MAX = 2;
-    /*static const unsigned int WATER_DEFAULT = 1;
-    static const inline vector<unsigned int> DATA_DEFAULT = {2000, 1, 1};
-    static const inline vector<string> STUDENT_DEFAULT = {"FirstName", "LastName",
-                                                          "Patronymic", "1"};*/
     Note() = default;
     Note(const vector<unsigned int>& data_info, const vector<string>& student_info,
          const double water_number);
